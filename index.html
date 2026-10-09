@@ -11,7 +11,12 @@
     }
 
     body {
-        margin: 0;
+     
+<audio id="backgroundMusic"
+       src="./love-song.mp3"
+       loop
+       preload="auto"
+       playsinline></audio>   margin: 0;
         overflow: hidden;
         font-family: "Trebuchet MS", sans-serif;
         background: linear-gradient(135deg, #ffd6e7, #ffeef6, #ffd1e3);
@@ -626,6 +631,24 @@ function createHeartBurst() {
 
 }
 
+const music = document.getElementById("backgroundMusic");
+
+// Keep the music looping at a higher volume.
+music.loop = true;
+music.volume = 0.9;
+
+// Start music after the visitor interacts with the website.
+// No pause button and no restart when switching pages.
+function startMusic() {
+  if (music.paused) {
+    music.play().catch(() => {
+      // If playback is blocked, a later tap can retry.
+    });
+  }
+}
+
+document.addEventListener("pointerdown", startMusic);
+document.addEventListener("keydown", startMusic);
 </script>
 
 </body>
